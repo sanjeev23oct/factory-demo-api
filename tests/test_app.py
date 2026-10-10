@@ -13,7 +13,7 @@ class AppTest(unittest.TestCase):
     def test_create_then_list(self):
         status, task = self.call("POST", "/tasks", {"title": "  buy milk "})
         self.assertEqual(status, 201)
-        self.assertEqual(task, {"id": 1, "title": "buy milk", "done": False})
+        self.assertEqual(task, {"id": 1, "title": "buy milk", "done": False, "due": None})
         self.assertEqual(self.call("GET", "/tasks"), (200, [task]))
 
     def test_create_without_title_is_rejected(self):
