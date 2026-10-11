@@ -20,6 +20,10 @@ def validate_title(body):
 
 def handle(store, method, path, body=None):
     """Returns (status, json-serializable body)."""
+    if path == "/health":
+        print("health check called")
+        return 200, {"status": "ok", "tasks": len(store.all())}
+
     if path == "/tasks":
         if method == "GET":
             return 200, store.all()
