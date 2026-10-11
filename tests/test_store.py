@@ -19,3 +19,13 @@ class TaskStoreTest(unittest.TestCase):
         task = store.create("a")
         task["title"] = "changed outside"
         self.assertEqual(store.get(task["id"])["title"], "a")
+
+    def test_create_without_due_defaults_to_none(self):
+        store = TaskStore()
+        task = store.create("a")
+        self.assertIsNone(task["due"])
+
+    def test_create_with_due_returns_that_due(self):
+        store = TaskStore()
+        task = store.create("a", due="2026-11-01")
+        self.assertEqual(task["due"], "2026-11-01")
