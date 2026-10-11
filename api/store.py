@@ -18,8 +18,8 @@ class TaskStore:
             raise NotFound(task_id)
         return dict(self._tasks[task_id])
 
-    def create(self, title):
-        task = {"id": self._next_id, "title": title, "done": False}
+    def create(self, title, due=None):
+        task = {"id": self._next_id, "title": title, "done": False, "due": due}
         self._tasks[task["id"]] = task
         self._next_id += 1
         return dict(task)

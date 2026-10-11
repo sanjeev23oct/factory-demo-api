@@ -9,9 +9,10 @@ Standard library only, no dependencies.
 | Method | Path | Does |
 | --- | --- | --- |
 | GET | `/tasks` | List tasks |
-| POST | `/tasks` | Create a task from `{"title": "..."}` |
+| GET | `/tasks?overdue=true` | List tasks whose `due` is before today and not done |
+| POST | `/tasks` | Create a task from `{"title": "...", "due": "YYYY-MM-DD"}` (`due` is optional) |
 | GET | `/tasks/<id>` | Fetch one task |
-| PATCH | `/tasks/<id>` | Update `title` or `done` |
+| PATCH | `/tasks/<id>` | Update `title`, `done`, or `due` (`null` clears it) |
 | DELETE | `/tasks/<id>` | Remove a task |
 
 Errors are JSON: `{"error": "<message>"}` with a 4xx status.
