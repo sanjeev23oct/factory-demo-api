@@ -35,3 +35,9 @@ class AppTest(unittest.TestCase):
         self.call("POST", "/tasks", {"title": "a"})
         self.assertEqual(self.call("DELETE", "/tasks/1"), (204, None))
         self.assertEqual(self.call("GET", "/tasks"), (200, []))
+
+    def test_trailing_slash_is_treated_like_no_slash(self):
+        self.assertEqual(self.call("GET", "/tasks/"), (200, []))
+        status, task = self.call("POST", "/tasks/", {"title": "a"})
+        self.assertEqual(status, 201)
+        self.assertEqual(self.call("GET", "/tasks/1/"), (200, task))

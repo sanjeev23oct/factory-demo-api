@@ -20,6 +20,9 @@ def validate_title(body):
 
 def handle(store, method, path, body=None):
     """Returns (status, json-serializable body)."""
+    if path != "/" and path.endswith("/"):
+        path = path.rstrip("/")
+
     if path == "/tasks":
         if method == "GET":
             return 200, store.all()
